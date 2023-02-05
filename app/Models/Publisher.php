@@ -4,16 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Author extends Model
+class Publisher extends Model
 {
     use HasFactory;
 
+    protected $table = 'publishers';
 
-    protected $table = 'authors';
-    protected $fillable = ['author_name'];
-
+    protected $fillable = ['publisher_name'];
 
     public function books()
     {

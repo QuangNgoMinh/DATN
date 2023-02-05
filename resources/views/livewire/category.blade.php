@@ -1,16 +1,15 @@
 <div>
-
-    <x-slot name="title">{{ __('Author') }}</x-slot>
+    <x-slot name="title">{{ __('Category') }}</x-slot>
     <a
         class="flex items-center justify-between p-4 mb-8 mt-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">
         <div class="flex items-center">
-            <span>{{ __('Authors') }} {{ __($totalAuthor) }}</span>
+            <span>{{ __('Category ') }} {{ __($totalCategory) }}</span>
         </div>
         <span>
             <button
                 class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                 wire:click="showForm">
-                Create Author
+                Create Category
             </button>
         </span>
     </a>
@@ -20,7 +19,7 @@
         </div>
     @endif
     @if ($showTable == true)
-        {{-- author table --}}
+        {{-- category table --}}
         <div class="container">
             <div class="flex flex-grow-1">
                 <input
@@ -40,23 +39,23 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                        @foreach ($authors as $author)
+                        @foreach ($categorys as $category)
                             <tr class="text-gray-700 dark:text-gray-400">
                                 <td class="px-4 py-3">
                                     <div class="flex items-center text-sm">
                                         <div>
-                                            <p class="font-semibold">{{ $author->id }}</p>
+                                            <p class="font-semibold">{{ $category->id }}</p>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-4 py-3 text-sm">
-                                    {{ $author->author_name }}
+                                    {{ $category->category_name }}
                                 </td>
                                 <td class="px-4 py-3">
                                     <div class="flex items-center space-x-4 text-sm">
                                         <button
                                             class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                                            aria-label="Edit" wire:click="editAuthor({{ $author->id }})">
+                                            aria-label="Edit" wire:click="editCategory({{ $category->id }})">
                                             <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
                                                 viewBox="0 0 20 20">
                                                 <path
@@ -66,7 +65,7 @@
                                         </button>
                                         <button
                                             class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                                            aria-label="Delete" wire:click="deleteAuthor({{ $author->id }})">
+                                            aria-label="Delete" wire:click="deleteCategory({{ $category->id }})">
                                             <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
                                                 viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd"
@@ -82,13 +81,13 @@
                     </tbody>
                 </table>
             </div>
-
-            {{ $authors->links() }}
+            {{ $categorys->links() }}
         </div>
     @endif
 
+
     @if ($createForm == true)
-        {{-- create-author --}}
+        {{-- create-Category --}}
         <button
             class="px-4 py-2 my-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-black-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
             type="submit" wire:click="goBack">
@@ -97,8 +96,8 @@
         <form action="" wire:submit.prevent="store">
             <input
                 class="w-full py-3 px-2 text-sm text-gray-700 placeholder-gray-900 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-dark focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
-                wire:model.lazy="author_name" type="text" />
-            @error('author_name')
+                wire:model.lazy="category_name" type="text" placeholder="Enter Category Name" />
+            @error('category_name')
                 <span class="text-red-600">{{ $message }}</span> <br>
             @enderror
 
@@ -109,28 +108,26 @@
             </button>
         </form>
     @endif
-
     @if ($updateForm == true)
-        {{-- update author --}}
+        {{-- update Category --}}
         <button
             class="px-4 py-2 my-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-black-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
             type="submit" wire:click="goBack">
             Go Back
         </button>
-        <form action="" wire:submit.prevent="update({{ $author_id }})">
+        <form action="" wire:submit.prevent="update({{ $category_id }})">
             <input
                 class="w-full py-3 px-2 text-sm text-gray-700 placeholder-gray-900 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-dark focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
-                type="text" placeholder="Update Author" wire:model='edit_author_name' />
-            @error('edit_author_name')
+                type="text" placeholder="Update Category" wire:model='edit_category_name' />
+            @error('edit_category_name')
                 <span class="text-red-600">{{ $message }}</span> <br>
             @enderror
             <button
                 class="px-4 py-2 my-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                 type="submit">
-                Update Author
+                Update Category
             </button>
         </form>
         <!-- End of modal backdrop -->
     @endif
-
 </div>

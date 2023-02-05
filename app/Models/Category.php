@@ -4,17 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Author extends Model
+class Category extends Model
 {
     use HasFactory;
 
-
-    protected $table = 'authors';
-    protected $fillable = ['author_name'];
-
-
+    protected $table = 'categories';
+    protected $fillable = ['category_name'];
     public function books()
     {
         return $this->hasMany(Book::class);
