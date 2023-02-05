@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', Dashboard::class);
+Route::get('/dashboard', Dashboard::class)->name('dashboard');
+Route::get('/author', Author::class)->name('author');
 
 
