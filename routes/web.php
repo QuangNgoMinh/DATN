@@ -10,6 +10,7 @@ use App\Http\Livewire\Publisher;
 use App\Http\Livewire\Report;
 use App\Http\Livewire\Setting;
 use App\Http\Livewire\Student;
+use App\Http\Livewire\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,8 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/dashboard', Dashboard::class)->name('dashboard');
 // Route::get('/author', Author::class)->name('author');
 
+
+
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
@@ -37,9 +40,36 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/issue-book', IssueBook::class)->name('issue_book');
     Route::get('/report', Report::class)->name('report');
     Route::get('/setting', Setting::class)->name('setting');
+    Route::get('/admin/user', User::class)->name('admin.user')->middleware('is_admin');
 });
 
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/', Login::class)->name('login');
+    
+
 });
+
+// Route::group(['middleware' => 'admin'], function () {
+//     Route::get('/admin', AdminLogin::class)->name('admin-login');
+//     // Route::get('/', Login::class)->name('login');
+//     // Route::get('/admin', AdminLoginController::class)->name('admin-login');
+
+// });
+// Route::get('admin', [AdminLogin::class, 'adminLogin'])->name('admin')->middleware('is_admin');
+
+// Route::group(['prefix'=>'/admin'],function(){
+// 	Route::get('/dashboard',Dashboard::class);
+	
+// })->middleware('is_admin');
+
+
+// Route::group(['middleware' => 'auth'], function () {
+
+    
+// });
+
+// Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
+
+
+
