@@ -6,6 +6,11 @@ use App\Models\Student as ModelsStudent;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Notifications\Notifiable;
+
 class Student extends Component
 {
     public $showTable = true;
@@ -18,6 +23,8 @@ class Student extends Component
     public $phone;
     public $gender;
     public $classes;
+    
+    public $password;
 
     public $student_id;
     public $edit_name;
@@ -29,7 +36,7 @@ class Student extends Component
 
     public $search;
     public $totalStudent;
-    use WithPagination;
+    use WithPagination, HasFactory, Notifiable;
     public function render()
     {
         $this->totalStudent = ModelsStudent::count();
@@ -83,7 +90,10 @@ class Student extends Component
             'address' => ['required'],
             'gender' => ['required'],
             'classes' => ['required'],
+            // 'password' => ['string'],
         ]);
+
+        // $validate['password'] = bcrypt($validate['password']);
 
         $result = ModelsStudent::create($validate);
         if ($result) {

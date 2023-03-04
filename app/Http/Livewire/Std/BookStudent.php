@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Std;
 
 use App\Models\Author;
 use App\Models\Book as ModelsBook;
@@ -15,7 +15,7 @@ use Livewire\WithFileUploads;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
-class Book extends Component
+class BookStudent extends Component
 {
     use WithFileUploads;
     public $showTable = true;
@@ -24,10 +24,6 @@ class Book extends Component
     public $categorys;
     public $publishers;
     public $authors;
-
-    public $total_book;
-
-    public $remaining_book;
 
     public $uniques;
 
@@ -61,11 +57,11 @@ class Book extends Component
         $this->authors = Author::orderBy('id', 'DESC')->get();
         // $this->uniques = BookImages::orderBy('unique_id', 'DESC')->get();
         if ($this->search != "") {
-            $books = ModelsBook::orderBy('id', 'DESC')->where('book_name', 'LIKE', '%' . $this->search . '%')->paginate(3);
-            return view('livewire.book', compact('books'))->layout('layout.app');
+            $books = ModelsBook::orderBy('id', 'DESC')->where('book_name', 'LIKE', '%' . $this->search . '%')->paginate(6);
+            return view('livewire.std.stdBook', compact('books'))->layout('layout.std.app');
         } else {
-            $books = ModelsBook::orderBy('id', 'DESC')->paginate(3);
-            return view('livewire.book', compact('books'))->layout('layout.app');
+            $books = ModelsBook::orderBy('id', 'DESC')->paginate(6);
+            return view('livewire.std.stdBook', compact('books'))->layout('layout.std.app');
         }
     }
 
@@ -81,7 +77,6 @@ class Book extends Component
         $this->author_id = "";
         $this->publisher_id = "";
         $this->book_name = "";
-        $this->images = [];
 
         // update variable
         $this->book_id = "";
@@ -105,7 +100,6 @@ class Book extends Component
             'author_id' => ['required'],
             'book_name' => ['required'],
             // 'images' => ['required'],
-            'total_book' => ['required'],
         ]);
 
         $uniqID = Carbon::now()->timestamp . uniqid();
@@ -116,10 +110,7 @@ class Book extends Component
         $book->author_id = $this->author_id;
         $book->book_name = $this->book_name;
         $book->unique_id = $uniqID;
-        $book->remaining_book = $this->total_book;
-        $book->total_book = $this->total_book;
-        $book->remaining_book = $this->total_book;
-        // dd($book->remaining_book);
+
 
 
         foreach ($this->images as $key => $image) {
@@ -133,12 +124,11 @@ class Book extends Component
         }
         
         $validate['unique_id'] = $uniqID;
-        $validate['remaining_book'] = $book->remaining_book;
         unset($validate['images']);
         // dd($validate);
         // $book->save();
         // session()->flash('success', 'Book Add Successfully');
-        
+
         $result = ModelsBook::create($validate);
         if ($result) {
             session()->flash('success', 'Book Add Successfully');
@@ -146,7 +136,7 @@ class Book extends Component
             $this->createForm = false;
             $this->resetField();
         } else {
-            session()->flash('error', 'Book Not Add Successfully');
+            session()->flash('error', 'Author Not Add Successfully');
         }
     }
     public function editBook($id)
@@ -160,23 +150,23 @@ class Book extends Component
         $this->edit_author_id = $books->author_id;
         $this->edit_publisher_id = $books->publisher_id;
         $this->edit_book_name = $books->book_name;
-        // $this->edit_unique_id = $books->unique_id;
+        $this->edit_unique_id = $books->unique_id;
         // dd($books->unique_id);
     }
 
     public function update($id)
     {
-        // $editUniqID = Carbon::now()->timestamp . md5(random_int(1, 10000));
+        $editUniqID = Carbon::now()->timestamp . md5(random_int(1, 10000));
         // dd($uniqID);
         $books = ModelsBook::findOrFail($id);
         $books->book_name = $this->edit_book_name;
         $books->category_id = $this->edit_category_id;
         $books->publisher_id = $this->edit_publisher_id;
         $books->author_id = $this->edit_author_id;
-        // $books->unique_id = $editUniqID;
-        // for ($i = 0 ; $i < count($this->images) ; $i++) {
-        //     unset($this->images[$i]);
-        // }
+        $books->unique_id = $editUniqID;
+        for ($i = 0 ; $i < count($this->images) ; $i++) {
+            unset($this->images[$i]);
+        }
         // dd($this->images);
         // $imageDelete = BookImages::where('book_unique_id', $this->edit_unique_id)->first();
 
@@ -186,20 +176,20 @@ class Book extends Component
         // $imageDelete = BookImages::where('book_unique_id', $this->edit_unique_id)->first();
         // $imageDelete->delete();
         // dd($imageDelete);
-        // if ($this->images != '') {
-        //     foreach ($this->images as $key => $image) {
+        if ($this->images != '') {
+            foreach ($this->images as $key => $image) {
                 
-        //         // dd($imageDelete);
-        //         $bimage = new BookImages();                
-        //         $bimage->book_unique_id = $books->unique_id;
+                // dd($imageDelete);
+                $bimage = new BookImages();                
+                $bimage->book_unique_id = $books->unique_id;
 
-        //         $imageName = Carbon::now()->timestamp . $key . '.' .$this->images[$key]->extension() . md5(random_int(1, 10000));
-        //         $this->images[$key]->storeAs('all', $imageName);
+                $imageName = Carbon::now()->timestamp . $key . '.' .$this->images[$key]->extension() . md5(random_int(1, 10000));
+                $this->images[$key]->storeAs('all', $imageName);
 
-        //         $bimage->image = $imageName;
-        //         $bimage->save();
-        //     }
-        // }
+                $bimage->image = $imageName;
+                $bimage->save();
+            }
+        }
         // dd($books->unique_id);
         $result = $books->save();
         if ($result) {
@@ -222,13 +212,13 @@ class Book extends Component
         $unique_id = ModelsBook::where('id', '=', $id)->first();
         // dd($unique_id->unique_id);
         $delete = ModelsBookImages::where('book_unique_id', '=', $unique_id->unique_id)->first();
-        // dd($delete);
+        // dd($delete->id);
         ModelsBookImages::findOrFail($delete->id)->delete();
         $result = ModelsBook::findOrFail($id)->delete();
         if ($result) {
             session()->flash('success', 'Book Delete Successfully');
         } else {
-            session()->flash('error', 'Book Not Delete Successfully');
+            session()->flash('error', 'Author Not Delete Successfully');
         }
     }
 }

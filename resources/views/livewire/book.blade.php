@@ -38,7 +38,10 @@
                             <th class="px-4 py-3">Category</th>
                             <th class="px-4 py-3">Publisher</th>
                             <th class="px-4 py-3">Author</th>
+                            <th class="px-4 py-3">Total Books</th>
+                            <th class="px-4 py-3">Remaining Books</th>
                             <th class="px-4 py-3">Status</th>
+                            <th class="px-4 py-3">Image</th>
                             <th class="px-4 py-3">Action</th>
                         </tr>
                     </thead>
@@ -65,7 +68,24 @@
                                     {{ $book->authors->author_name }}
                                 </td>
                                 <td class="px-4 py-3 text-sm">
+                                    {{ $book->total_book }}
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    {{ $book->remaining_book }}
+                                </td>
+                                <td class="px-4 py-3 text-sm">
                                     {{ $book->book_status == 'Y' ? 'Available' : 'Not Available' }}
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    @php
+                                        $images = App\Models\BookImages::WHERE('book_unique_id',
+                                        $book->unique_id)->get();
+                                    @endphp
+                                    @foreach ($images as $item)
+                                        <img src="{{asset('uploads/all')}}/{{$item->image}}"
+                                        style="width: 100px; " alt="">
+                                    @endforeach
+
                                 </td>
                                 <td class="px-4 py-3">
                                     <div class="flex items-center space-x-4 text-sm">
@@ -147,6 +167,21 @@
             @error('author_id')
                 <span class="text-red-600">{{ $message }}</span> <br>
             @enderror
+
+            <input
+                class="w-full py-3 px-2 my-4 text-sm text-gray-700 placeholder-gray-900 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-dark focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
+                wire:model.lazy="images" type="file" />
+            @error('images')
+                <span class="text-red-600">{{ $message }}</span> <br>
+            @enderror
+
+            <input
+                class="w-full py-3 px-2 my-4 text-sm text-gray-700 placeholder-gray-900 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-dark focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
+                wire:model.lazy="total_book" placeholder="Enter total books..." type="number" min="1" />
+            @error('total_book')
+                <span class="text-red-600">{{ $message }}</span> <br>
+            @enderror
+
             <button
                 class="px-4 py-2 my-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                 type="submit">
@@ -188,6 +223,21 @@
                     <option value="{{ $author->id }}">{{ $author->author_name }}</option>
                 @endforeach
             </select>
+            {{-- <input
+                class="w-full py-3 px-2 my-4 text-sm text-gray-700 placeholder-gray-900 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-dark focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
+                wire:model.lazy="images" type="file" />
+            @error('images')
+                <span class="text-red-600">{{ $message }}</span> <br>
+            @enderror --}}
+            
+            {{-- @php
+            dd($book_id);
+                $images  = App\Models\BookImages::WHERE('book_unique_id', $books->unique_id)->get();
+                // dd($images);
+            @endphp
+            @foreach ($images as $item)
+            <img src="{{asset('uploads/all')}}/{{$item->image}}" style="height: 100px; width: 100px;" alt="">
+            @endforeach --}}
             <button
                 class="px-4 py-2 my-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                 type="submit">

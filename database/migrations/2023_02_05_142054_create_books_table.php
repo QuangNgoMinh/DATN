@@ -20,6 +20,9 @@ return new class extends Migration
             $table->foreignId('author_id')->constrained('authors');
             $table->foreignId('publisher_id')->constrained('publishers');
             $table->foreignId('category_id')->constrained('categories');
+            $table->string('unique_id')->unique();
+            $table->integer('total_book');
+            $table->integer('remaining_book');
             $table->string('book_status')->default('Y');
             $table->timestamps();
         });

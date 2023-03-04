@@ -29,6 +29,8 @@ class IssueBook extends Component
     public $return_date;
     public $book_status;
 
+    public $remaining_book;
+
     public $totalIssueBook;
     public function render()
     {
@@ -55,8 +57,8 @@ class IssueBook extends Component
 
     public function resetField()
     {
-        $this->student_id;
-        $this->book_id;
+        $this->student_id = "";
+        $this->book_id = "";
     }
     public function store()
     {
@@ -75,18 +77,22 @@ class IssueBook extends Component
         $issue->book_id = $this->book_id;
         $issue->student_id = $this->student_id;
         $issue->issue_date = date('Y-m-d');
-        $issue->return_date = date('Y-m-d', strtotime("+" . $return_days . "days"));
+        // $issue->return_date = date('Y-m-d', strtotime("+" . $return_days . "days"));
         $result = $issue->save();
 
         if ($result) {
             $books = Book::findOrFail($this->book_id);
-            $books->book_status = 'N';
+            $books->remaining_book -= 1;
+            if ($books->remaining_book == 0) {
+                $books->book_status = 'N';
+            }            
             $books->save();
             session()->flash('success', 'Book Issue Successfully');
             $this->showTable = true;
             $this->createForm = false;
+            $this->resetField();
         } else {
-            session()->flash('error', 'Author Not Issue Successfully');
+            session()->flash('error', 'Book Not Issue Successfully');
         }
     }
 
@@ -115,13 +121,17 @@ class IssueBook extends Component
 
         if ($result) {
             $books = Book::findOrFail($issues->book_id);
-            $books->book_status = 'Y';
+            $books->remaining_book += 1;
+            if ($books->remaining_book > 0) {
+                $books->book_status = 'Y';
+            }
+            
             $books->save();
             session()->flash('success', 'Book Issue Retruned Successfully');
             $this->updateForm = false;
             $this->showTable = true;
         } else {
-            session()->flash('error', 'Author Not Issue Retruned Successfully');
+            session()->flash('error', 'Book Not Issue Retruned Successfully');
         }
     }
 

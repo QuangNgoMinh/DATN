@@ -16,7 +16,7 @@ class Setting extends Component
 
     public function render()
     {
-        $settings = ModelsSetting::find(1);
+        $settings = ModelsSetting::count();
         return view('livewire.setting', compact('settings'))->layout('layout.app');
     }
 

@@ -22,7 +22,8 @@ class Login extends Component
             'password' => ['required'],
         ]);
 
-        $user = Auth::attempt(['name' => $this->username, 'password' => $this->password]);
+
+        $user = Auth::guard('web')->attempt(['name' => $this->username, 'password' => $this->password]);
 
         if ($user) {
             session()->flash('success', 'Login Successfully');

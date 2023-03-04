@@ -11,6 +11,9 @@ use App\Http\Livewire\Report;
 use App\Http\Livewire\Setting;
 use App\Http\Livewire\Student;
 use App\Http\Livewire\User;
+
+
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,7 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/category', Category::class)->name('category');
     Route::get('/publisher', Publisher::class)->name('publisher');
     Route::get('/book', Book::class)->name('book');
-    Route::get('/student', Student::class)->name('students');
+    Route::get('/student', Student::class)->name('student');
     Route::get('/issue-book', IssueBook::class)->name('issue_book');
     Route::get('/report', Report::class)->name('report');
     Route::get('/setting', Setting::class)->name('setting');
@@ -46,30 +49,26 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/', Login::class)->name('login');
-    
-
 });
 
-// Route::group(['middleware' => 'admin'], function () {
-//     Route::get('/admin', AdminLogin::class)->name('admin-login');
-//     // Route::get('/', Login::class)->name('login');
-//     // Route::get('/admin', AdminLoginController::class)->name('admin-login');
-
-// });
-// Route::get('admin', [AdminLogin::class, 'adminLogin'])->name('admin')->middleware('is_admin');
-
-// Route::group(['prefix'=>'/admin'],function(){
-// 	Route::get('/dashboard',Dashboard::class);
-	
-// })->middleware('is_admin');
+use App\Http\Livewire\Std\AuthorStudent;
+use App\Http\Livewire\Std\DashboardStudent;
+use App\Http\Livewire\Std\BookStudent;
+use App\Http\Livewire\Std\CategoryStudent;
+use App\Http\Livewire\Std\LoginStudent;
+use App\Http\Livewire\Std\PublisherStudent;
 
 
-// Route::group(['middleware' => 'auth'], function () {
 
-    
+// Route::group(['middleware' => 'authstudent'], function () {
+    Route::get('std/dashboard', DashboardStudent::class)->name('dashboard-std');
+    Route::get('std/author', AuthorStudent::class)->name('author-std');
+    Route::get('std/book', BookStudent::class)->name('book-std');
+    Route::get('std/category', CategoryStudent::class)->name('category-std');
+    Route::get('std/publisher', PublisherStudent::class)->name('publisher-std');
 // });
 
-// Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
 
-
-
+// Route::group(['middleware' => 'gueststudent'], function () {
+//     Route::get('/std', LoginStudent::class)->name('login-std');
+// });

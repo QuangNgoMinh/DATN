@@ -9,7 +9,7 @@
             <button
                 class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                 wire:click="showForm">
-                Issue Book
+                Create Issue Book
             </button>
         </span>
     </a>
@@ -149,22 +149,22 @@
             Go Back
         </button>
         <div class="">
-            <h4>Name :{{ $student_name }}</h4>
-            <h4>Email : {{ $email }}</h4>
-            <h4>phone:{{ $phone }}</h4>
-            <h4>issue_date :{{ $issue_date }}</h4>
-            <h4>return_date : {{ $return_date }}</h4>
+            <h4>Name: {{ $student_name }}</h4>
+            <h4>Email: {{ $email }}</h4>
+            <h4>Phone: {{ $phone }}</h4>
+            <h4>Issue_date: {{ $issue_date }}</h4>
+            <h4>Return_date: {{ $return_date }}</h4>
             @if ($issue_status == 'Y')
                 <span>Status : Returned</span>
             @else
-                @if (date('Y-m-d') > $return_date)
+                {{-- @if (date('Y-m-d') > $return_date)
                     <span>Fine : @php
                         $date1 = date_create(date('Y-m-d'));
                         $date2 = date_create($return_date);
                         $diff = date_diff($date1, $date2);
                         $days = $diff->format('$a');
                     @endphp {{ $days }}</span>
-                @endif
+                @endif --}}
             @endif
 
         </div>
@@ -173,7 +173,7 @@
             <button
                 class="px-4 py-2 my-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                 type="submit" wire:click="returnBook({{ $issue_id }})">
-                return
+                Return
             </button>
         @endif
     @endif
