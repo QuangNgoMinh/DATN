@@ -17,6 +17,7 @@ class AuthorStudent extends Component
     public $author_id;
     public $edit_author_name;
     public $totalAuthor;
+    public $stt = 1;
 
     use WithPagination;
     public function render()

@@ -16,13 +16,13 @@ class Category extends Component
     public $category_id;
     public $edit_category_name;
     public $search;
-
     public $totalCategory;
+    public $stt = 1;
 
     use WithPagination;
     public function render()
     {
-        $this->totalCategory = ModelsCategory::count();
+        $this->totalCategory = ModelsCategory::count();        
         $searchItem = '%' . $this->search . '%';
         if ($searchItem) {
             $categorys = ModelsCategory::orderBy('id', 'DESC')->where('category_name', 'LIKE', $searchItem)->paginate(6);

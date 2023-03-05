@@ -50,7 +50,7 @@
                                 <td class="px-4 py-3">
                                     <div class="flex items-center text-sm">
                                         <div>
-                                            <p class="font-semibold">{{ $student->id }}</p>
+                                            <p class="font-semibold">{{ $stt++ }}</p>
                                         </div>
                                     </div>
                                 </td>
@@ -120,28 +120,28 @@
 
             <input
                 class="w-full py-3 px-2 my-4 text-sm text-gray-700 placeholder-gray-900 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-dark focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
-                wire:model.lazy="name" placeholder="Enter Name" type="text" />
+                wire:model.lazy="name" placeholder="Enter The Name Of Student..." type="text" />
             @error('name')
                 <span class="text-red-600">{{ $message }}</span> <br>
             @enderror
 
             <input
                 class="w-full py-3 px-2 my-4 text-sm text-gray-700 placeholder-gray-900 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-dark focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
-                wire:model.lazy="email" type="text" placeholder="Enter Email" />
+                wire:model.lazy="email" type="text" placeholder="Enter The Email Of Student..." />
             @error('email')
                 <span class="text-red-600">{{ $message }}</span> <br>
             @enderror
 
             <input
                 class="w-full py-3 px-2 my-4 text-sm text-gray-700 placeholder-gray-900 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-dark focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
-                wire:model.lazy="phone" placeholder="Enter Phone" type="text" />
+                wire:model.lazy="phone" placeholder="Enter The Number Phone Of Student..." type="text" />
             @error('phone')
                 <span class="text-red-600">{{ $message }}</span> <br>
             @enderror
 
             <select wire:model.lazy="gender"
                 class="w-full py-3 px-2 my-4 text-sm text-gray-700 placeholder-gray-900 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-dark focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input">
-                <option selected>Enter the Gender</option>
+                <option selected>Enter The Gender Of Student...</option>
                 <option value="1">Male</option>
                 <option value="0">Female</option>
 
@@ -152,14 +152,14 @@
 
             <input
                 class="w-full py-3 px-2 my-4 text-sm text-gray-700 placeholder-gray-900 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-dark focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
-                wire:model.lazy="address" placeholder="Enter Address" type="text" />
+                wire:model.lazy="address" placeholder="Enter The Address Of Student..." type="text" />
             @error('address')
                 <span class="text-red-600">{{ $message }}</span> <br>
             @enderror
 
             <input
                 class="w-full py-3 px-2 my-4 text-sm text-gray-700 placeholder-gray-900 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-dark focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
-                wire:model.lazy="classes" placeholder="Enter classes" type="text" />
+                wire:model.lazy="classes" placeholder="Enter The Class Of Student" type="text" />
             @error('classes')
                 <span class="text-red-600">{{ $message }}</span> <br>
             @enderror

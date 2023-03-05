@@ -44,7 +44,7 @@
                                 <td class="px-4 py-3">
                                     <div class="flex items-center text-sm">
                                         <div>
-                                            <p class="font-semibold">{{ $category->id }}</p>
+                                            <p class="font-semibold">{{ $stt++ }}</p>
                                         </div>
                                     </div>
                                 </td>
@@ -96,7 +96,7 @@
         <form action="" wire:submit.prevent="store">
             <input
                 class="w-full py-3 px-2 text-sm text-gray-700 placeholder-gray-900 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-dark focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
-                wire:model.lazy="category_name" type="text" placeholder="Enter Category Name" />
+                wire:model.lazy="category_name" type="text" placeholder="Enter The Name Of Category" />
             @error('category_name')
                 <span class="text-red-600">{{ $message }}</span> <br>
             @enderror

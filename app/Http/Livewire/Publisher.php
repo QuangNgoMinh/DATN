@@ -17,6 +17,7 @@ class Publisher extends Component
     public $edit_publisher_name;
 
     public $totalPublisher;
+    public $stt = 1;
 
     use WithPagination;
     public function render()

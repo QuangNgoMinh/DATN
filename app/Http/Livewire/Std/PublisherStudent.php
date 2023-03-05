@@ -12,6 +12,7 @@ class PublisherStudent extends Component
     public $createForm = false;
     public $updateForm = false;
     public $search;
+    public $stt = 1;
     public $publisher_name;
     public $publisher_id;
     public $edit_publisher_name;

@@ -51,7 +51,7 @@
                                 <td class="px-4 py-3">
                                     <div class="flex items-center text-sm">
                                         <div>
-                                            <p class="font-semibold">{{ $book->id }}</p>
+                                            <p class="font-semibold">{{ $stt++ }}</p>
                                         </div>
                                     </div>
                                 </td>
@@ -133,13 +133,13 @@
 
             <input
                 class="w-full py-3 px-2 my-4 text-sm text-gray-700 placeholder-gray-900 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-dark focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
-                wire:model.lazy="book_name" type="text" />
+                wire:model.lazy="book_name" type="text" placeholder="Enter The Name Of Book"/>
             @error('book_name')
                 <span class="text-red-600">{{ $message }}</span> <br>
             @enderror
             <select wire:model.lazy="category_id"
                 class="w-full py-3 px-2 my-4 text-sm text-gray-700 placeholder-gray-900 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-dark focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input">
-                <option selected>Enter the category</option>
+                <option selected>Enter The Name Of Category</option>
                 @foreach ($categorys as $category)
                     <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                 @endforeach
@@ -149,7 +149,7 @@
             @enderror
             <select wire:model.lazy="publisher_id"
                 class="w-full py-3 px-2 my-4 text-sm text-gray-700 placeholder-gray-900 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-dark focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input">
-                <option selected>Enter the publisher</option>
+                <option selected>Enter The Name Of Publisher</option>
                 @foreach ($publishers as $publisher)
                     <option value="{{ $publisher->id }}">{{ $publisher->publisher_name }}</option>
                 @endforeach
@@ -159,7 +159,7 @@
             @enderror
             <select wire:model.lazy="author_id"
                 class="w-full py-3 px-2 my-4 text-sm text-gray-700 placeholder-gray-900 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-dark focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input">
-                <option selected>Enter the author</option>
+                <option selected>Enter The Name Of Author</option>
                 @foreach ($authors as $author)
                     <option value="{{ $author->id }}">{{ $author->author_name }}</option>
                 @endforeach
@@ -177,7 +177,7 @@
 
             <input
                 class="w-full py-3 px-2 my-4 text-sm text-gray-700 placeholder-gray-900 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-dark focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
-                wire:model.lazy="total_book" placeholder="Enter total books..." type="number" min="1" />
+                wire:model.lazy="total_book" placeholder="Enter Total Books..." type="number" min="1" />
             @error('total_book')
                 <span class="text-red-600">{{ $message }}</span> <br>
             @enderror

@@ -44,7 +44,7 @@
                                 <td class="px-4 py-3">
                                     <div class="flex items-center text-sm">
                                         <div>
-                                            <p class="font-semibold">{{ $publisher->id }}</p>
+                                            <p class="font-semibold">{{ $stt++ }}</p>
                                         </div>
                                     </div>
                                 </td>
@@ -95,7 +95,7 @@
         <form action="" wire:submit.prevent="store">
             <input
                 class="w-full py-3 px-2 text-sm text-gray-700 placeholder-gray-900 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-dark focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
-                wire:model.lazy="publisher_name" type="text" />
+                wire:model.lazy="publisher_name" type="text" placeholder="Enter The Name Of Publisher"/>
             @error('publisher_name')
                 <span class="text-red-600">{{ $message }}</span> <br>
             @enderror

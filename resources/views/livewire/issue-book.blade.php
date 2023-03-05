@@ -20,14 +20,14 @@
     @endif
     @if ($showTable == true)
         {{-- category table --}}
-        <div class="container">
+        {{-- <div class="container">
             <div class="flex flex-grow-1">
                 <input
                     class="w-75 py-3 px-2 my-4 text-sm text-gray-700 placeholder-gray-900 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-dark focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
                     wire:model="search" type="text" placeholder="Search Here..." />
 
             </div>
-        </div>
+        </div> --}}
         <div class="w-full overflow-hidden rounded-lg shadow-xs my-4">
             <div class="w-full overflow-x-auto">
                 <table class="w-full whitespace-no-wrap">
@@ -37,9 +37,9 @@
                             <th class="px-4 py-3">Id</th>
                             <th class="px-4 py-3">Name</th>
                             <th class="px-4 py-3">Book</th>
-                            <th class="px-4 py-3">Issue_date</th>
-                            <th class="px-4 py-3">Return_date</th>
-                            <th class="px-4 py-3">Issue_status</th>
+                            <th class="px-4 py-3">Issue Date</th>
+                            <th class="px-4 py-3">Return Date</th>
+                            <th class="px-4 py-3">Issue Status</th>
                             <th class="px-4 py-3">Action</th>
                         </tr>
                     </thead>
@@ -49,7 +49,7 @@
                                 <td class="px-4 py-3">
                                     <div class="flex items-center text-sm">
                                         <div>
-                                            <p class="font-semibold">{{ $issue->id }}</p>
+                                            <p class="font-semibold">{{ $stt++ }}</p>
                                         </div>
                                     </div>
                                 </td>
@@ -66,7 +66,7 @@
                                     {{ $issue->return_date }}
                                 </td>
                                 <td class="px-4 py-3 text-sm">
-                                    {{ $issue->issue_status == 'Y' ? 'Return' : 'Not Return' }}
+                                    {{ $issue->issue_status == 'Y' ? 'Returned' : "Haven't Returned" }}
                                 </td>
 
                                 <td class="px-4 py-3">
@@ -115,7 +115,7 @@
         <form action="" wire:submit.prevent="store">
             <select wire:model.lazy="book_id"
                 class="w-full py-3 px-2 my-4 text-sm text-gray-700 placeholder-gray-900 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-dark focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input">
-                <option selected>Enter the Book</option>
+                <option selected>Enter The Name Of Book...</option>
                 @foreach ($books as $book)
                     <option value="{{ $book->id }}">{{ $book->book_name }}</option>
                 @endforeach
@@ -125,7 +125,7 @@
             @enderror
             <select wire:model.lazy="student_id"
                 class="w-full py-3 px-2 my-4 text-sm text-gray-700 placeholder-gray-900 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-dark focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input">
-                <option selected>Enter the Student</option>
+                <option selected>Enter The Name Of Student</option>
                 @foreach ($students as $student)
                     <option value="{{ $student->id }}">{{ $student->name }}</option>
                 @endforeach
@@ -149,13 +149,14 @@
             Go Back
         </button>
         <div class="">
-            <h4>Name: {{ $student_name }}</h4>
-            <h4>Email: {{ $email }}</h4>
-            <h4>Phone: {{ $phone }}</h4>
-            <h4>Issue_date: {{ $issue_date }}</h4>
-            <h4>Return_date: {{ $return_date }}</h4>
+            <h4><b>Name Of Student: </b> {{ $student_name }}</h4>
+            <h4><b>Email Of Student:</b> {{ $email }}</h4>
+            <h4><b>Number Phone Of Student:</b> {{ $phone }}</h4>
+            <h4><b>Name Of Book:</b> {{ $book_name }}</h4>
+            <h4><b>Issue Date:</b> {{ $issue_date }}</h4>
+            <h4><b>Return Date:</b> {{ $return_date }}</h4>
             @if ($issue_status == 'Y')
-                <span>Status : Returned</span>
+                <span><b>Status:</b> Returned</span>
             @else
                 {{-- @if (date('Y-m-d') > $return_date)
                     <span>Fine : @php

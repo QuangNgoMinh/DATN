@@ -104,12 +104,46 @@
             </div>
             <div>
                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                    Total Issue Books
+                    Total Issue Books Haven't Returned
                 </p>
                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
                     {{ $totalIssueBook }}
                 </p>
             </div>
         </div>
+    </div>
+    <div>
+        <canvas id="myChart" height="100px"></canvas>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+        <script type="text/javascript">
+  
+        var labels =  {{ Js::from($labels) }};
+        var users =  {{ Js::from($data) }};
+    
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'THE QUANTITY OF ISSUE BOOK / DAY',
+                backgroundColor: 'rgb(148,52,235)',
+                borderColor: 'rgb(148,52,235)',
+                data: users,
+            }]
+        };
+    
+        const config = {
+            type: 'line',
+            data: data,
+            options: {}
+        };
+    
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    
+    </script>
+    
     </div>
 </div>

@@ -28,16 +28,15 @@ class IssueBook extends Component
     public $issue_date;
     public $return_date;
     public $book_status;
-
+    public $stt = 1;
     public $remaining_book;
-
     public $totalIssueBook;
+
     public function render()
     {
         $this->totalIssueBook = ModelsIssueBook::count();
         $this->students = Student::orderBy('id', 'DESC')->get();
         $this->books = Book::where('book_status', 'Y')->orderBy('id', 'DESC')->get();
-
         $issues = ModelsIssueBook::orderBy('id', 'DESC')->paginate(6);
         return view('livewire.issue-book', compact('issues'))->layout('layout.app');
     }
@@ -124,8 +123,7 @@ class IssueBook extends Component
             $books->remaining_book += 1;
             if ($books->remaining_book > 0) {
                 $books->book_status = 'Y';
-            }
-            
+            }            
             $books->save();
             session()->flash('success', 'Book Issue Retruned Successfully');
             $this->updateForm = false;
@@ -138,14 +136,20 @@ class IssueBook extends Component
     public function deleteBook($id)
     {
         $issues = ModelsIssueBook::findOrFail($id);
+        // dd($issues->b);
         $result = $issues->delete();
         if ($result) {
             $books = Book::findOrFail($issues->book_id);
-            $books->book_status = 'Y';
-            $books->save();
+            if($issues->issue_status == 'N'){
+                $books->remaining_book += 1;
+                if($books->book_status = 'N'){
+                    $books->book_status = 'Y';
+                }
+                $books->save();
+            }
             session()->flash('success', 'Book Issue Delete Successfully');
         } else {
-            session()->flash('error', 'Author Not Issue Delete Successfully');
+            session()->flash('error', 'Book Not Issue Delete Successfully');
         }
     }
 }

@@ -36,6 +36,7 @@ class Student extends Component
 
     public $search;
     public $totalStudent;
+    public $stt = 1;
     use WithPagination, HasFactory, Notifiable;
     public function render()
     {

@@ -25,6 +25,7 @@ class User extends Component
 
     public $search;
     public $totalUser;
+    public $stt = 1;
     use WithPagination;
     public function render()
     {

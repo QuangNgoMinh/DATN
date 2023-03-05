@@ -52,6 +52,8 @@ class Book extends Component
     public $search;
     public $totalBook;
 
+    public $stt = 1;
+
     use WithPagination;
     public function render()
     {

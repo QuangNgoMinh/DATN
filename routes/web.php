@@ -66,7 +66,9 @@ use App\Http\Livewire\Std\PublisherStudent;
     Route::get('std/book', BookStudent::class)->name('book-std');
     Route::get('std/category', CategoryStudent::class)->name('category-std');
     Route::get('std/publisher', PublisherStudent::class)->name('publisher-std');
-// });
+    
+
+    // });
 
 
 // Route::group(['middleware' => 'gueststudent'], function () {

@@ -12,6 +12,7 @@ class CategoryStudent extends Component
     public $createForm = false;
     public $updateForm = false;
     public $category_name;
+    public $stt = 1;
 
     public $category_id;
     public $edit_category_name;

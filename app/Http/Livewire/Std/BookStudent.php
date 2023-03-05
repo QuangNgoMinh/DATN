@@ -26,6 +26,7 @@ class BookStudent extends Component
     public $authors;
 
     public $uniques;
+    public $stt = 1;
 
     public $category_id;
     public $author_id;

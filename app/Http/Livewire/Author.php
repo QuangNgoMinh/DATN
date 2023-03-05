@@ -16,6 +16,7 @@ class Author extends Component
     public $author_id;
     public $edit_author_name;
     public $totalAuthor;
+    public $stt = 1;
 
     use WithPagination;
     public function render()
@@ -28,6 +29,7 @@ class Author extends Component
             return view('livewire.author', compact('authors'))->layout('layout.app');
         }
         $authors = ModelsAuthor::orderBy('id', 'DESC')->paginate(6);
+        // $this->stt = $authors->count();
         return view('livewire.author', compact('authors'))->layout('layout.app');
     }
 
